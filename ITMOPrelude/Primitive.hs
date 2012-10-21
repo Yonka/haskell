@@ -132,6 +132,9 @@ normalizeRat :: Rat -> Rat
 normalizeRat (Rat (Pos b) c) = Rat (Pos (natDiv b (gcd b c))) (natDiv c (gcd b c))
 normalizeRat (Rat (Neg b) c) = Rat (Neg (natDiv b (gcd b c))) (natDiv c (gcd b c))
 
+ratZero = Rat intZero natOne
+ratOne = Rat intOne natOne
+
 ratNeg :: Rat -> Rat
 ratNeg (Rat x y) = normalizeRat (Rat (intNeg x) y)
 
