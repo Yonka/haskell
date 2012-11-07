@@ -36,3 +36,11 @@ instance Monad Maybe where
 instance Monad List where
 	return x = Cons x Nil
 	Cons a b >>= f = f a ++ (b >>= f)
+
+newtype State s a = State { runState :: s -> (s, a) }
+
+instance Monad (State s) where
+    return a = State $ \s -> (s, a)
+    act >>= f = State $ \s ->
+		let (s', a) = runState act s
+		in runState (f a) s'
